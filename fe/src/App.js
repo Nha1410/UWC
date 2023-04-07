@@ -3,6 +3,9 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import DefaultLayout from './components/Layout/DefaultLayout';
+import AuthLayout from './components/Layout/AuthLayout';
+import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
+import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
 
 function App() {
     return (
@@ -17,8 +20,22 @@ function App() {
                             </DefaultLayout>
                         }
                     />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="signup" element={<SignUp />} />
+                    <Route
+                        path="/login"
+                        element={
+                            <AuthLayout Sidebar={<SidebarLogin />}>
+                                <Login />
+                            </AuthLayout>
+                        }
+                    />
+                    <Route
+                        path="signup"
+                        element={
+                            <AuthLayout Sidebar={<SidebarSignUp />}>
+                                <SignUp />
+                            </AuthLayout>
+                        }
+                    />
                 </Routes>
             </div>
         </Router>
