@@ -1,13 +1,15 @@
-import Header from './Header';
-import Sidebar from './Sidebar';
+import Sidebar from '../components/Sidebar';
+import classNames from 'classnames/bind';
+import styles from './DefaultLayout.module.css';
+
+const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
     return (
         <div>
-            <Header />
-            <div className="container">
+            <div className={cx('wrapper')}>
                 <Sidebar />
-                <div className="content">{children}</div>
+                <div className="content flex-1">{children}</div>
             </div>
         </div>
     );
