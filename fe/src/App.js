@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Management from './pages/Management';
 import DefaultLayout from './components/Layout/DefaultLayout';
 import AuthLayout from './components/Layout/AuthLayout';
 import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
@@ -34,6 +35,14 @@ function App() {
                             <AuthLayout Sidebar={<SidebarSignUp />}>
                                 <SignUp />
                             </AuthLayout>
+                        }
+                    />
+                    <Route
+                        path="/task-management"
+                        element={
+                            <DefaultLayout>
+                                <Management />
+                            </DefaultLayout>
                         }
                     />
                 </Routes>
