@@ -9,6 +9,7 @@ import AuthLayout from './components/Layout/AuthLayout';
 import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
 import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
 import VehicalManagement from './pages/VehicleManagement';
+import ScheduleList from './pages/ScheduleList';
 
 function App() {
     return (
@@ -60,6 +61,14 @@ function App() {
                         element={
                             <DefaultLayout>
                                 <VehicalManagement />
+                            </DefaultLayout>
+                        }
+                    />
+                    <Route
+                        path="/schedule-list"
+                        element={
+                            <DefaultLayout>
+                                <ScheduleList />
                             </DefaultLayout>
                         }
                     />

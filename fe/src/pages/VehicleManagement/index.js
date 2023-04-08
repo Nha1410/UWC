@@ -7,7 +7,7 @@ function VehicalManagement() {
         <div className="w-full h-full bg-[#1A202C] pb-[30px]">
             <div className="pt-[35px]">
                 <div className="flex flex-row justify-between">
-                    <h2 className="text-white ml-[30px] font-semibold text-[22px]">Danh sách nhân viên</h2>
+                    <h2 className="text-white ml-[30px] font-semibold text-[22px]">Danh sách phương tiện</h2>
                     <div className="gap-x-[20px] flex flex row mr-[30px]">
                         <div className="flex w-[230px] h-[40px] bg-[#364153] border rounded-[8px] justify-between items-center">
                             <div className="text-[12px] font-normal text-white opacity-50 ml-[20px]">Search</div>
