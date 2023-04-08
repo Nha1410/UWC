@@ -19,8 +19,8 @@ function Sidebar() {
     // test active
     let active = false;
     return (
-        <div className="w-1/6 h-screen bg-[#364153] py-[30px] flex justify-center items-center">
-            <div className="flex flex-col items-center">
+        <div className="w-1/6 h-screen bg-[#364153] py-[30px] flex justify-center items-center sticky top-0">
+            <div className="flex flex-col items-center w-full">
                 <div className="flex flex-col items-center">
                     <img alt="logo" src="/images/logo.png" />
                     <span className="text-xl font-bold text-white mt-[23px]">UWC</span>
