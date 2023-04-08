@@ -1,0 +1,14 @@
+.popup-content {
+    background-color: #364153;
+    color: #FFFFFF;
+    padding: 1rem 1.5rem;
+    width: 30%;
+    height: max-content;
+    border-radius: 10px;
+}
+.modal > .header {
+width: 100%;
+font-size: 22px;
+text-align: left;
+padding: 5px;
+}
