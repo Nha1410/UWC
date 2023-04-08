@@ -7,7 +7,6 @@ import Select from 'react-select';
 
 import BoxContent from '../../components/Commons/DashboardBoxContent';
 import BoxItem from '../../components/Commons/DashboardBoxInfor';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/Commons/Button';
 import { useState } from 'react';
