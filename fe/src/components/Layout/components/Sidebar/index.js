@@ -3,6 +3,7 @@
 // const cx = classname.bind(styles);
 import BoxItem from '../../../Commons/SidebarBoxItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
     faGauge,
     faPeopleRoof,
@@ -20,71 +21,73 @@ function Sidebar() {
     let active = false;
     return (
         <div className="min-w-[240px] h-screen overflow-auto bg-[#364153] py-[30px] flex justify-center sticky top-0">
-            <div className="flex flex-col w-full items-center">
-                <div className="flex flex-col pb-[20px] items-center">
-                    <img alt="logo" src="/images/logo.png" />
-                    <span className="text-xl font-bold text-white mt-[23px]">UWC</span>
-                </div>
-                <div className="w-full">
-                    <a href="/">
+            <div className="flex flex-col w-full items-center h-full justify-between">
+                <div className="pt-[50px]">
+                    <div className="flex flex-col pb-[20px] items-center">
+                        <img alt="logo" src="/images/logo.png" />
+                        <span className="text-xl font-bold text-white mt-[23px]">UWC</span>
+                    </div>
+                    <div className="w-full">
+                        <Link to="/">
+                            <BoxItem
+                                title="Trang chủ"
+                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                isActive={active}
+                                iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
+                            />
+                        </Link>
+                        <Link to="/staff-management">
+                            <BoxItem
+                                title="Quản lý nhân sư"
+                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                isActive={active}
+                                iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
+                            />
+                        </Link>
+                        <Link to="/task-management">
+                            <BoxItem
+                                title="Quản lý nhiệm vụ"
+                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                isActive={active}
+                                iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
+                            />
+                        </Link>
+                        <Link to="/schedule-list">
+                            <BoxItem
+                                title="Tạo nhiệm vụ"
+                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                isActive={active}
+                                iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
+                            />
+                        </Link>
+                        <Link to="/vehicle-management">
+                            <BoxItem
+                                title="Quản lý phương tiện"
+                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                isActive={active}
+                                iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
+                            />
+                        </Link>
                         <BoxItem
-                            title="Trang chủ"
+                            title="Tin nhắn"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
-                            iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
+                            numberNotifications="14"
+                            iconComponent={<FontAwesomeIcon icon={faMessage} className="mr-[5px]" />}
                         />
-                    </a>
-                    <a href="/staff-management">
                         <BoxItem
-                            title="Quản lý nhân sư"
+                            title="Thông báo"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
-                            iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
+                            iconComponent={<FontAwesomeIcon icon={faBell} className="mr-[5px]" />}
                         />
-                    </a>
-                    <a href="/task-management">
                         <BoxItem
-                            title="Quản lý nhiệm vụ"
+                            title="Cài đặt"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
-                            iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
+                            iconComponent={<FontAwesomeIcon icon={faGear} className="mr-[5px]" />}
                         />
-                    </a>
-                    <a href="/schedule-list">
-                        <BoxItem
-                            title="Tạo nhiệm vụ"
-                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                            isActive={active}
-                            iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
-                        />
-                    </a>
-                    <a href="/vehicle-management">
-                        <BoxItem
-                            title="Quản lý phương tiện"
-                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                            isActive={active}
-                            iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
-                        />
-                    </a>
-                    <BoxItem
-                        title="Tin nhắn"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        numberNotifications="14"
-                        iconComponent={<FontAwesomeIcon icon={faMessage} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Thông báo"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faBell} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Cài đặt"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faGear} className="mr-[5px]" />}
-                    />
+                    </div>
                 </div>
                 {/* <div className="mx-[30px] mt-[50px] w-[150px] h-[100px] bg-[#1A202C] bg-opacity-20 rounded-lg">
                     <img alt="illustration" src="/images/Illustration.png" />
