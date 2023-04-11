@@ -26,36 +26,46 @@ function Sidebar() {
                     <span className="text-xl font-bold text-white mt-[23px]">UWC</span>
                 </div>
                 <div className="w-full">
-                    <BoxItem
-                        title="Trang chủ"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Quản lý nhân sư"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Quản lý nhiệm vụ"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Tạo nhiệm vụ"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
-                    />
-                    <BoxItem
-                        title="Quản lý phương tiện"
-                        textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                        isActive={active}
-                        iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
-                    />
+                    <a href="/">
+                        <BoxItem
+                            title="Trang chủ"
+                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                            isActive={active}
+                            iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
+                        />
+                    </a>
+                    <a href="/staff-management">
+                        <BoxItem
+                            title="Quản lý nhân sư"
+                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                            isActive={active}
+                            iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
+                        />
+                    </a>
+                    <a href="/task-management">
+                        <BoxItem
+                            title="Quản lý nhiệm vụ"
+                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                            isActive={active}
+                            iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
+                        />
+                    </a>
+                    <a href="/schedule-list">
+                        <BoxItem
+                            title="Tạo nhiệm vụ"
+                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                            isActive={active}
+                            iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
+                        />
+                    </a>
+                    <a href="/vehicle-management">
+                        <BoxItem
+                            title="Quản lý phương tiện"
+                            textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                            isActive={active}
+                            iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
+                        />
+                    </a>
                     <BoxItem
                         title="Tin nhắn"
                         textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
