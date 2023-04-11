@@ -85,7 +85,7 @@ function Home() {
     return (
         <div className="p-[20px] flex flex-col w-full h-screen bg-[#1A202C]">
             <div className="w-full flex justify-between text-white items-center">
-                <span className="font-bold text-lg">Dashboard</span>
+                <span className="font-bold text-xl pb-[10px]">Dashboard</span>
                 {/* <div className="flex justify-center items-center">
                     <div className="w-[170px] h-[50px] bg-[#364153] rounded-lg mr-[20px] flex justify-center items-center">
                         <span>02-03-2023</span>
@@ -106,7 +106,7 @@ function Home() {
                 <div className="flex flex-row w-full h-1/2">
                     <div className="py-[10px] w-3/5 h-full">
                         <BoxContent title="Quản lý lao công">
-                            <div className="text-white text-xs w-full flex flex-col">
+                            <div className="text-white text-sm w-full flex flex-col">
                                 {/* header of table */}
                                 <tr className="flex justify-center items-center py-[10px] border-b">
                                     <th className="flex justify-center items-center w-1/6">
@@ -192,7 +192,7 @@ function Home() {
                 <div className="flex flex-row w-full h-1/2">
                     <div className="py-[10px] w-3/5">
                         <BoxContent title="Quản lý người vận chuyển">
-                            <div className="text-white text-xs w-full flex flex-col">
+                            <div className="text-white text-sm w-full flex flex-col">
                                 {/* header of table */}
                                 <tr className="flex justify-center items-center py-[10px] border-b">
                                     <th className="flex justify-center items-center w-1/5">

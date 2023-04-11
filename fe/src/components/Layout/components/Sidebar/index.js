@@ -22,7 +22,7 @@ function Sidebar() {
     return (
         <div className="min-w-[240px] h-screen overflow-auto bg-[#364153] py-[30px] flex justify-center sticky top-0">
             <div className="flex flex-col w-full items-center h-full justify-between">
-                <div className="pt-[50px]">
+                <div className="py-[20px] w-full">
                     <div className="flex flex-col pb-[20px] items-center">
                         <img alt="logo" src="/images/logo.png" />
                         <span className="text-xl font-bold text-white mt-[23px]">UWC</span>
@@ -38,7 +38,7 @@ function Sidebar() {
                         </Link>
                         <Link to="/staff-management">
                             <BoxItem
-                                title="Quản lý nhân sư"
+                                title="Quản lý nhân sự"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
                                 iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
@@ -92,7 +92,7 @@ function Sidebar() {
                 {/* <div className="mx-[30px] mt-[50px] w-[150px] h-[100px] bg-[#1A202C] bg-opacity-20 rounded-lg">
                     <img alt="illustration" src="/images/Illustration.png" />
                 </div> */}
-                <div className="flex justify-center justify-self-end items-center mt-[80px] w-full px-[10px]">
+                <div className="flex justify-center justify-self-end items-center mt-[50px] w-full px-[10px]">
                     <img className="w-[45px] h-[45px] rounded-lg" alt="avatar" src="/images/fake-avatar.png" />
                     <div className="flex-1 flex justify-center items-center">
                         <div className="flex flex-col justify-center text-sm flex-1 ml-[20px]">
