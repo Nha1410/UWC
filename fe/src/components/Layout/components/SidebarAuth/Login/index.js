@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
     return (
-        <div className="w-1/4 h-screen bg-[#364153] flex justify-center items-center">
-            <div className="w-1/4 h-2/3 flex flex-col items-center">
+        <div className="min-w-[240px] h-screen bg-[#364153] flex justify-center items-center">
+            <div className="px-[20px] h-2/3 flex flex-col items-center">
                 <div className="flex flex-col items-center">
                     <img alt="logo" src="/images/logo.png" />
                     <span className="text-xl font-bold text-white mt-[23px]">Log in</span>
