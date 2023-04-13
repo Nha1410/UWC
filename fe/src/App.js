@@ -6,6 +6,7 @@ import DefaultLayout from './components/Layout/DefaultLayout';
 import AuthLayout from './components/Layout/AuthLayout';
 import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
 import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
+import RequireAuth from './services/Auth/RequireAuth';
 
 function App() {
     return (
@@ -15,9 +16,11 @@ function App() {
                     <Route
                         path="/"
                         element={
-                            <DefaultLayout>
-                                <Home />
-                            </DefaultLayout>
+                            <RequireAuth>
+                                <DefaultLayout>
+                                    <Home />
+                                </DefaultLayout>
+                            </RequireAuth>
                         }
                     />
                     <Route
