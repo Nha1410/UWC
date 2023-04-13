@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const route = require("./routes");
-const db = require("./app/models/index");
+const db = require("./models");
 
 const app = express();
 const port = process.env.PORT;
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 try {
-  db.sequelize.sync();
+  db.sequelize.authenticate();
   console.log("connect MySQL success");
 } catch (error) {
   console.log(error);
