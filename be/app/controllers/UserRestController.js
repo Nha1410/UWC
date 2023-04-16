@@ -45,6 +45,7 @@ module.exports = {
     if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
 
     const foundUser = await userService.findUserByEmail(email);
+    console.log("sdkjflsjdfjslkdf", foundUser.password);
     if (!foundUser) return res.sendStatus(401); //Unauthorized
 
     // evaluate password

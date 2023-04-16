@@ -32,6 +32,7 @@ route(app);
 //   password: "12345678",
 // });
 // console.log(userService.getInfomationOfUser(1));
+// console.log(userService.findUserByEmail("vanvuong24072001@gmail.com"));
 
 app.listen(port, function () {
   console.log(`App listening at http://localhost:${port}`);

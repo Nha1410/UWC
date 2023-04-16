@@ -18,7 +18,8 @@ module.exports = {
     return user;
   },
   async findUserByEmail(email) {
-    return userRepo.findByEmail(email);
+    const user = await userRepo.findByEmail(email);
+    return user;
   },
   async genrateRefreshToken(foundUser, cookies) {
     // const roles = Object.values(foundUser.roles).filter(Boolean);
@@ -34,7 +35,7 @@ module.exports = {
       { expiresIn: "10s" },
     );
 
-    const newRefreshToken = jwt.sign({ id: foundUser.id }, process.env.REFRESH_TOKEN_SECRET, {
+    const newRefreshToken = jwt.sign({ id: foundUser.id, email: foundUser.email }, process.env.REFRESH_TOKEN_SECRET, {
       expiresIn: "15s",
     });
 

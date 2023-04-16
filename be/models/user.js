@@ -36,20 +36,20 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      hooks: {
-        afterFind: (result) => {
-          if (Array.isArray(result)) {
-            for (const elem of result) {
-              delete elem.dataValues.password;
-              delete elem.dataValues.refreshToken;
-            }
-          } else {
-            delete result.dataValues.password;
-            delete result.dataValues.refreshToken;
-          }
-          return result;
-        },
-      },
+      // hooks: {
+      //   afterFind: (result) => {
+      //     if (Array.isArray(result)) {
+      //       for (const elem of result) {
+      //         delete elem.dataValues.password;
+      //         delete elem.dataValues.refreshToken;
+      //       }
+      //     } else {
+      //       delete result.dataValues.password;
+      //       delete result.dataValues.refreshToken;
+      //     }
+      //     return result;
+      //   },
+      // },
     },
   );
   return User;
