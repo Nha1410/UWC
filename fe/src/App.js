@@ -17,16 +17,16 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <RequireAuth>
+                    <Route element={<RequireAuth />}>
+                        <Route
+                            path="/"
+                            element={
                                 <DefaultLayout>
                                     <Home />
                                 </DefaultLayout>
-                            </RequireAuth>
-                        }
-                    />
+                            }
+                        />
+                    </Route>
                     <Route
                         path="/login"
                         element={
@@ -36,21 +36,23 @@ function App() {
                         }
                     />
                     <Route
-                        path="signup"
+                        path="/signup"
                         element={
                             <AuthLayout Sidebar={<SidebarSignUp />}>
                                 <SignUp />
                             </AuthLayout>
                         }
                     />
-                    <Route
-                        path="/task-management"
-                        element={
-                            <DefaultLayout>
-                                <TaskManagement />
-                            </DefaultLayout>
-                        }
-                    />
+                    <Route element={<RequireAuth />}>
+                        <Route
+                            path="/task-management"
+                            element={
+                                <DefaultLayout>
+                                    <TaskManagement />
+                                </DefaultLayout>
+                            }
+                        />
+                    </Route>
                     <Route
                         path="/staff-management"
                         element={

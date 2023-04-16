@@ -1,3 +1,6 @@
+const bcrypt = require("bcryptjs");
+const userService = require("../../services/User");
+
 module.exports = {
   // test rest controller
   async test(req, res) {
@@ -6,27 +9,60 @@ module.exports = {
 
   // [POST] register a user
   async register(req, res) {
+    const { password, firstName, lastName, phone, email } = req.body;
+
+    if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
+
+    // check for duplicate usernames in the db
+    // const duplicate = await User.findOne({ username: user }).exec();
+    const duplicate = await userService.isUserExist(email);
+    if (duplicate) return res.sendStatus(409); //Conflict
+
     try {
-      const user = new User(req.body);
-      await user.save();
-      res.status(201).send({ user });
-    } catch (error) {
-      console.log(error);
-      res.status(400).send(error);
+      //create and store the new user
+      const user = await userService.createNewUser({
+        email,
+        firstName,
+        lastName,
+        phone,
+        password,
+      });
+      console.log(user);
+
+      res.status(201).json({ success: `New user created!` });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: err.message });
     }
   },
 
-  // [POST] logina user
+  // [POST] login a user
   async login(req, res) {
-    try {
-      const { email, password } = req.body;
-      const user = await User.findByCredentials(email, password);
-      if (!user) return res.status(401).send("Login failed! Check authentication credentials");
-      const token = user.generateAuthToken();
-      res.send({ user, token });
-    } catch (error) {
-      console.log(error);
-      res.status(400).send(error);
+    const cookies = req.cookies;
+    console.log(req.body);
+    const { email, password } = req.body;
+    console.log(email, password);
+    if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
+
+    const foundUser = await userService.findUserByEmail(email);
+    if (!foundUser) return res.sendStatus(401); //Unauthorized
+
+    // evaluate password
+    const match = await bcrypt.compare(password, foundUser.password);
+    if (match) {
+      const serviceRefreshToken = await userService.genrateRefreshToken(foundUser);
+      // Creates Secure Cookie with refresh token
+      res.cookie("jwt", serviceRefreshToken.newRefreshToken, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      // Send authorization roles and access token to user
+      res.json({ accessToken: serviceRefreshToken.accessToken, email: email });
+    } else {
+      res.sendStatus(401);
     }
   },
 };

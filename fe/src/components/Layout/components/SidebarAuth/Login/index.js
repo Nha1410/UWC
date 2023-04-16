@@ -9,8 +9,8 @@ import { useDispatch } from 'react-redux';
 function Sidebar() {
     const userRef = useRef();
     const errRef = useRef();
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('dsfsdfs');
     const navigate = useNavigate();
 
@@ -23,15 +23,15 @@ function Sidebar() {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd]);
+    }, [email, password]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userData = await login({ user, pwd }).unwrap();
-            dispatch(setCredentials({ ...userData, user }));
-            setUser('');
-            setPwd('');
+            const userData = await login({ email, password }).unwrap();
+            dispatch(setCredentials({ ...userData, email }));
+            setEmail('');
+            setPassword('');
             navigate('/');
         } catch (err) {
             if (!err?.response) {
@@ -47,8 +47,8 @@ function Sidebar() {
         }
     };
 
-    const handleUserInput = (e) => setUser(e.target.value);
-    const handlePwdInput = (e) => setPwd(e.target.value);
+    const handleUserInput = (e) => setEmail(e.target.value);
+    const handlePwdInput = (e) => setPassword(e.target.value);
     return (
         <div className="w-1/4 h-screen bg-[#364153] flex justify-center items-center">
             <div className="w-1/4 h-2/3 flex flex-col items-center">
@@ -65,7 +65,7 @@ function Sidebar() {
                     <div>
                         <InputForm
                             refInput={userRef}
-                            valueInput={user}
+                            valueInput={email}
                             handleOnChange={handleUserInput}
                             nameLabel="Email Address"
                             placeholder="example@gmail.com"
@@ -76,7 +76,7 @@ function Sidebar() {
                     <div className="mt-[70px]">
                         <InputForm
                             nameLabel="Password Address"
-                            valueInput={pwd}
+                            valueInput={password}
                             handleOnChange={handlePwdInput}
                             placeholder="123@yourname"
                             width="w-96"
@@ -87,7 +87,7 @@ function Sidebar() {
                         <input type="checkbox" className="bg-[#364153]" />
                         <label className="ml-[10px] text-white">Rememeber me</label>
                     </div>
-                    <div className="mt-[70px]">
+                    <div className="mt-[70px]" onClick={handleSubmit}>
                         <Button name="Log in" width="w-96" height="h-[50px]" bgColor="bg-[#605CFF]" />
                     </div>
                     <div className="mt-[30px]">

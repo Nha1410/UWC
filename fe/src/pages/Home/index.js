@@ -11,12 +11,14 @@ import { useSelector } from 'react-redux';
 import { selectCurrentToken, selectCurrentUser } from '../../services/Auth/AuthSlice';
 
 function Home() {
+    console.log('sdfsdfsdfsdf');
     const user = useSelector(selectCurrentUser);
     const token = useSelector(selectCurrentToken);
 
     const userAuthSuccess = user ? `Hello ${user}` : 'Hello';
     const tokenAuthSuccess = `${token.slice(0, 9)}...`;
 
+    console.log('sdf');
     console.log(userAuthSuccess, ' ', tokenAuthSuccess);
 
     const [janitors, setJanitors] = useState([
