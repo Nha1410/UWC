@@ -8,6 +8,7 @@ import DefaultLayout from './components/Layout/DefaultLayout';
 import AuthLayout from './components/Layout/AuthLayout';
 import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
 import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
+import RequireAuth from './services/Auth/RequireAuth';
 import VehicalManagement from './pages/VehicleManagement';
 import ScheduleList from './pages/ScheduleList';
 
@@ -16,14 +17,16 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <DefaultLayout>
-                                <Home />
-                            </DefaultLayout>
-                        }
-                    />
+                    <Route element={<RequireAuth />}>
+                        <Route
+                            path="/"
+                            element={
+                                <DefaultLayout>
+                                    <Home />
+                                </DefaultLayout>
+                            }
+                        />
+                    </Route>
                     <Route
                         path="/login"
                         element={
@@ -33,21 +36,23 @@ function App() {
                         }
                     />
                     <Route
-                        path="signup"
+                        path="/signup"
                         element={
                             <AuthLayout Sidebar={<SidebarSignUp />}>
                                 <SignUp />
                             </AuthLayout>
                         }
                     />
-                    <Route
-                        path="/task-management"
-                        element={
-                            <DefaultLayout>
-                                <TaskManagement />
-                            </DefaultLayout>
-                        }
-                    />
+                    <Route element={<RequireAuth />}>
+                        <Route
+                            path="/task-management"
+                            element={
+                                <DefaultLayout>
+                                    <TaskManagement />
+                                </DefaultLayout>
+                            }
+                        />
+                    </Route>
                     <Route
                         path="/staff-management"
                         element={
