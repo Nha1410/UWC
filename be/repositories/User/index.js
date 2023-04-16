@@ -14,12 +14,12 @@ module.exports = {
   },
   async findById(id) {
     try {
-      const user = await db.User.findByPk(id);
-      if (user === null) {
-        console.log("no user");
-      } else {
-        console.log(user);
-      }
+      const user = await db.User.findOne({
+        where: {
+          id: id,
+        },
+      });
+      return user;
     } catch (error) {
       console.log(error);
     }

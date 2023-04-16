@@ -34,7 +34,7 @@ module.exports = {
       { expiresIn: "10s" },
     );
 
-    const newRefreshToken = jwt.sign({ email: foundUser.email }, process.env.REFRESH_TOKEN_SECRET, {
+    const newRefreshToken = jwt.sign({ id: foundUser.id }, process.env.REFRESH_TOKEN_SECRET, {
       expiresIn: "15s",
     });
 
@@ -48,5 +48,13 @@ module.exports = {
     });
     await foundUser.save();
     return { newRefreshToken, accessToken };
+  },
+  async getInfomationOfUser(id) {
+    try {
+      const user = userRepo.findById(id);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
   },
 };

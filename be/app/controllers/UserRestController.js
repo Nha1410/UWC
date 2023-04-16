@@ -53,7 +53,6 @@ module.exports = {
       const serviceRefreshToken = await userService.genrateRefreshToken(foundUser);
       // Creates Secure Cookie with refresh token
       res.cookie("jwt", serviceRefreshToken.newRefreshToken, {
-        httpOnly: true,
         secure: true,
         sameSite: "None",
         maxAge: 24 * 60 * 60 * 1000,
@@ -64,5 +63,12 @@ module.exports = {
     } else {
       res.sendStatus(401);
     }
+  },
+  async getInfoUser(req, res) {
+    const userId = req.params.id;
+    console.log("sdfsdsdf");
+    if (!userId) res.status(400).json({ message: "id is required" });
+    const user = await userService.getInfomationOfUser(userId);
+    return res.json(user);
   },
 };

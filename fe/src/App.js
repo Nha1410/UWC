@@ -11,75 +11,91 @@ import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
 import RequireAuth from './services/Auth/RequireAuth';
 import VehicalManagement from './pages/VehicleManagement';
 import ScheduleList from './pages/ScheduleList';
+import { CookiesProvider } from 'react-cookie';
+import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
+import { selectCurrentToken, setCredentials } from './services/Auth/AuthSlice';
+import jwt from 'jwt-decode';
+import { useDispatch } from 'react-redux';
 
 function App() {
+    const [cookies, setCookie] = useCookies(['jwt']);
+    const dispatch = useDispatch();
+    if (!useSelector(selectCurrentToken) && cookies.jwt) {
+        const user = jwt(cookies.jwt);
+        console.log(user);
+        dispatch(setCredentials({ email: user.email, id: user.id, accessToken: cookies.jwt }));
+    }
+    console.log('sdfsdfdfsdf');
     return (
-        <Router>
-            <div className="App">
-                <Routes>
-                    <Route element={<RequireAuth />}>
+        <CookiesProvider>
+            <Router>
+                <div className="App">
+                    <Routes>
+                        <Route element={<RequireAuth />}>
+                            <Route
+                                path="/"
+                                element={
+                                    <DefaultLayout>
+                                        <Home />
+                                    </DefaultLayout>
+                                }
+                            />
+                        </Route>
                         <Route
-                            path="/"
+                            path="/login"
+                            element={
+                                <AuthLayout Sidebar={<SidebarLogin />}>
+                                    <Login />
+                                </AuthLayout>
+                            }
+                        />
+                        <Route
+                            path="/signup"
+                            element={
+                                <AuthLayout Sidebar={<SidebarSignUp />}>
+                                    <SignUp />
+                                </AuthLayout>
+                            }
+                        />
+                        <Route element={<RequireAuth />}>
+                            <Route
+                                path="/task-management"
+                                element={
+                                    <DefaultLayout>
+                                        <TaskManagement />
+                                    </DefaultLayout>
+                                }
+                            />
+                        </Route>
+                        <Route
+                            path="/staff-management"
                             element={
                                 <DefaultLayout>
-                                    <Home />
+                                    <StaffManagement />
                                 </DefaultLayout>
                             }
                         />
-                    </Route>
-                    <Route
-                        path="/login"
-                        element={
-                            <AuthLayout Sidebar={<SidebarLogin />}>
-                                <Login />
-                            </AuthLayout>
-                        }
-                    />
-                    <Route
-                        path="/signup"
-                        element={
-                            <AuthLayout Sidebar={<SidebarSignUp />}>
-                                <SignUp />
-                            </AuthLayout>
-                        }
-                    />
-                    <Route element={<RequireAuth />}>
                         <Route
-                            path="/task-management"
+                            path="/vehicle-management"
                             element={
                                 <DefaultLayout>
-                                    <TaskManagement />
+                                    <VehicalManagement />
                                 </DefaultLayout>
                             }
                         />
-                    </Route>
-                    <Route
-                        path="/staff-management"
-                        element={
-                            <DefaultLayout>
-                                <StaffManagement />
-                            </DefaultLayout>
-                        }
-                    />
-                    <Route
-                        path="/vehicle-management"
-                        element={
-                            <DefaultLayout>
-                                <VehicalManagement />
-                            </DefaultLayout>
-                        }
-                    />
-                    <Route
-                        path="/schedule-list"
-                        element={
-                            <DefaultLayout>
-                                <ScheduleList />
-                            </DefaultLayout>
-                        }
-                    />
-                </Routes>
-            </div>
-        </Router>
+                        <Route
+                            path="/schedule-list"
+                            element={
+                                <DefaultLayout>
+                                    <ScheduleList />
+                                </DefaultLayout>
+                            }
+                        />
+                    </Routes>
+                </div>
+            </Router>
+        </CookiesProvider>
     );
 }
 

@@ -9,17 +9,18 @@ import BoxInfo from '../../components/Commons/DashboardVehicleInfo';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentToken, selectCurrentUser } from '../../services/Auth/AuthSlice';
+import jwt from 'jwt-decode';
 
 function Home() {
     console.log('sdfsdfsdfsdf');
-    const user = useSelector(selectCurrentUser);
-    const token = useSelector(selectCurrentToken);
+    // const user = useSelector(selectCurrentUser);
+    // const token = useSelector(selectCurrentToken);
 
-    const userAuthSuccess = user ? `Hello ${user}` : 'Hello';
-    const tokenAuthSuccess = `${token.slice(0, 9)}...`;
+    // const userAuthSuccess = user ? `Hello ${user}` : 'Hello';
+    // const tokenAuthSuccess = `${token.slice(0, 9)}...`;
 
-    console.log('sdf');
-    console.log(userAuthSuccess, ' ', tokenAuthSuccess);
+    // console.log('sdf');
+    // console.log(userAuthSuccess, ' ', tokenAuthSuccess);
 
     const [janitors, setJanitors] = useState([
         {
@@ -154,43 +155,45 @@ function Home() {
                                     </th>
                                 </tr>
                                 {/* rows of table */}
-                                {janitors.map((janitor, index) => {
-                                    return (
-                                        <tr
-                                            className={`flex justify-center items-center py-[20px] rounded-lg ${
-                                                index % 2 !== 0 ? 'bg-[#1A202C]' : ''
-                                            }`}
-                                            key={index}
-                                        >
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <span className="w-full">#{janitor.id}</span>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <div className="flex justify-center items-center">
-                                                    <img alt="avatar" src="/images/fake-avatar-janitor.png" />
-                                                    <span className="w-full ml-[10px]">{janitor.name}</span>
-                                                </div>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <Button
-                                                    name={janitor.status ? 'Active' : 'Inactive'}
-                                                    width="w-2/3"
-                                                    height="h-full"
-                                                    bgColor={janitor.status ? 'bg-[#5CD8FF]' : 'bg-[#FF5C7A]'}
-                                                />
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <div className="flex flex-col items-center justify-center">
-                                                    <span>{janitor.mcp ?? '-'}</span>
-                                                    <span>{janitor.area ?? '-'}</span>
-                                                </div>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <span className="w-full">{janitor.timePerMonth}</span>
-                                            </th>
-                                        </tr>
-                                    );
-                                })}
+                                <div className="h-full overflow-auto">
+                                    {janitors.map((janitor, index) => {
+                                        return (
+                                            <tr
+                                                className={`flex justify-center items-center py-[10px] rounded-lg ${
+                                                    index % 2 !== 0 ? 'bg-[#1A202C]' : ''
+                                                }`}
+                                                key={index}
+                                            >
+                                                <th className="flex justify-center items-center w-1/6">
+                                                    <span className="w-full">#{janitor.id}</span>
+                                                </th>
+                                                <th className="flex justify-left items-center w-1/4">
+                                                    <div className="flex justify-center items-center">
+                                                        <img alt="avatar" src="/images/fake-avatar-janitor.png" />
+                                                        <span className="w-full ml-[10px]">{janitor.name}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/6">
+                                                    <Button
+                                                        name={janitor.status ? 'Active' : 'Inactive'}
+                                                        width="w-2/3"
+                                                        height="h-full"
+                                                        bgColor={janitor.status ? 'bg-[#5CD8FF]' : 'bg-[#FF5C7A]'}
+                                                    />
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/5">
+                                                    <div className="flex flex-col items-center justify-center">
+                                                        <span>{janitor.mcp ?? '-'}</span>
+                                                        <span>{janitor.area ?? '-'}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/6">
+                                                    <span className="w-full">{janitor.timePerMonth}</span>
+                                                </th>
+                                            </tr>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </BoxContent>
                     </div>
@@ -231,48 +234,43 @@ function Home() {
                                     </th>
                                 </tr>
                                 {/* rows of table */}
-                                {collectors.map((collector, index) => {
-                                    return (
-                                        <tr
-                                            className={`flex justify-center items-center py-[20px] rounded-lg ${
-                                                index % 2 !== 0 ? 'bg-[#1A202C]' : ''
-                                            }`}
-                                            key={index}
-                                        >
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <span className="w-full">#{collector.id}</span>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <div className="flex justify-center items-center">
-                                                    <img alt="avatar" src="/images/fake-avatar-janitor.png" />
-                                                    <span className="w-full ml-[10px]">{collector.name}</span>
-                                                </div>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <Button
-                                                    name={collector.status ? 'Active' : 'Inactive'}
-                                                    width="w-2/3"
-                                                    height="h-full"
-                                                    bgColor={collector.status ? 'bg-[#5CD8FF]' : 'bg-[#FF5C7A]'}
-                                                />
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <span className="">{collector.currentVehicle ?? '-'}</span>
-                                            </th>
-                                            <th className="flex justify-center items-center w-1/4">
-                                                <span className="w-full">{collector.timePerMonth}</span>
-                                            </th>
-                                        </tr>
-                                    );
-                                })}
+                                <div className="h-full overflow-auto">
+                                    {collectors.map((collector, index) => {
+                                        return (
+                                            <tr
+                                                className={`flex justify-center items-center py-[10px] rounded-lg ${
+                                                    index % 2 !== 0 ? 'bg-[#1A202C]' : ''
+                                                }`}
+                                                key={index}
+                                            >
+                                                <th className="flex justify-center items-center w-1/5">
+                                                    <span className="w-full">#{collector.id}</span>
+                                                </th>
+                                                <th className="flex justify-left items-center w-1/4">
+                                                    <div className="flex justify-center items-center">
+                                                        <img alt="avatar" src="/images/fake-avatar-janitor.png" />
+                                                        <span className="w-full ml-[10px]">{collector.name}</span>
+                                                    </div>
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/4">
+                                                    <Button
+                                                        name={collector.status ? 'Active' : 'Inactive'}
+                                                        width="w-2/3"
+                                                        height="h-full"
+                                                        bgColor={collector.status ? 'bg-[#5CD8FF]' : 'bg-[#FF5C7A]'}
+                                                    />
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/4">
+                                                    <span className="">{collector.currentVehicle ?? '-'}</span>
+                                                </th>
+                                                <th className="flex justify-center items-center w-1/4">
+                                                    <span className="w-full">{collector.timePerMonth}</span>
+                                                </th>
+                                            </tr>
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </BoxContent>
-                    </div>
-                </div>
-                <div className="flex-1 pr-[20px] flex flex-col content-around h-full">
-                    <div className="mt-[20px] pb-[20px]">
-                        <BoxContent title="Quản lý công việc">
-                            <div className="w-full h-[418px]"></div>
                         </BoxContent>
                     </div>
                     <div className="pt-[20px]">
