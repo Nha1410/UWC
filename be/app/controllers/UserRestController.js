@@ -24,7 +24,6 @@ module.exports = {
         email,
         firstName,
         lastName,
-        phone,
         password,
       });
       console.log(user);
@@ -69,7 +68,6 @@ module.exports = {
   // [GET] get infomation of user
   async getInfoUser(req, res) {
     const userId = req.params.id;
-    console.log("sdfsdsdf");
     if (!userId) res.status(400).json({ message: "id is required" });
     const user = await userService.getInfomationOfUser(userId);
     return res.json(user);

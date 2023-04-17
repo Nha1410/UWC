@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        get() {
+          return () => this.getDataValue("password");
+        },
       },
       phone: {
         type: DataTypes.STRING,
@@ -36,21 +39,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
-      // hooks: {
-      //   afterFind: (result) => {
-      //     if (Array.isArray(result)) {
-      //       for (const elem of result) {
-      //         delete elem.dataValues.password;
-      //         delete elem.dataValues.refreshToken;
-      //       }
-      //     } else {
-      //       delete result.dataValues.password;
-      //       delete result.dataValues.refreshToken;
-      //     }
-      //     return result;
-      //   },
-      // },
+      scopes: {
+        sensitive: {
+          attributes: { exclude: ["password", "refreshToken"] },
+        },
+      },
     },
   );
+
   return User;
 };

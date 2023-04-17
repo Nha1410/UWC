@@ -52,7 +52,7 @@ module.exports = {
   },
   async getInfomationOfUser(id) {
     try {
-      const user = userRepo.findById(id);
+      const user = await userRepo.findById(id, "sensitive");
       return user;
     } catch (error) {
       console.log(error);
