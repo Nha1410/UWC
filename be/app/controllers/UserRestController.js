@@ -65,11 +65,28 @@ module.exports = {
       res.sendStatus(401);
     }
   },
+
+  // [GET] get infomation of user
   async getInfoUser(req, res) {
     const userId = req.params.id;
     console.log("sdfsdsdf");
     if (!userId) res.status(400).json({ message: "id is required" });
     const user = await userService.getInfomationOfUser(userId);
     return res.json(user);
+  },
+
+  // [GET] logout user
+  async logOut(req, res) {
+    const { id, jwt } = req.body;
+
+    if (!jwt) return res.sendStatus(204); //No content
+
+    const user = userService.deleteRefreshTokenOfUser(id);
+    if (user) {
+      res.clearCookie("jwt", { sameSite: "None", secure: true });
+      return res.sendStatus(204);
+    } else {
+      res.status(400).json({ message: "User not exist" });
+    }
   },
 };

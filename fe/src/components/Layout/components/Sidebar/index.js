@@ -3,7 +3,7 @@
 // const cx = classname.bind(styles);
 import BoxItem from '../../../Commons/SidebarBoxItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     faGauge,
     faPeopleRoof,
@@ -15,10 +15,25 @@ import {
     faGear,
     faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { useLogoutMutation } from '../../../../services/Auth/logoutApiSlice';
+import jwt from 'jwt-decode';
+import { useCookies } from 'react-cookie';
 
 function Sidebar() {
     // test active
     let active = false;
+    const [logout, { isLoading }] = useLogoutMutation();
+    const [cookies, setCookie] = useCookies(['jwt']);
+    const jwtToken = cookies.jwt;
+    const navigate = useNavigate();
+    const hanldeLogout = async () => {
+        try {
+            await logout({ id: jwt(jwtToken).id, jwt: jwtToken }).unwrap();
+            navigate('/login');
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <div className="min-w-[240px] h-screen overflow-auto bg-[#364153] py-[30px] flex justify-center sticky top-0">
             <div className="flex flex-col w-full items-center h-full justify-between">
@@ -99,7 +114,11 @@ function Sidebar() {
                             <span className="text-white">Back Officer</span>
                             <span className="text-[#99B2C6]">Free Account</span>
                         </div>
-                        <FontAwesomeIcon icon={faRightFromBracket} className="text-white text-xl" />
+                        <FontAwesomeIcon
+                            onClick={hanldeLogout}
+                            icon={faRightFromBracket}
+                            className="text-white text-xl"
+                        />
                     </div>
                 </div>
             </div>

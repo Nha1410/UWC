@@ -58,4 +58,14 @@ module.exports = {
       console.log(error);
     }
   },
+  async deleteRefreshTokenOfUser(id) {
+    try {
+      let user = await userRepo.findById(id);
+      await user.update({ refreshToken: null });
+      user = await user.save;
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
