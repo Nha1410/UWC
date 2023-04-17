@@ -18,17 +18,30 @@ import {
 import { useLogoutMutation } from '../../../../services/Auth/logoutApiSlice';
 import jwt from 'jwt-decode';
 import { useCookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
+import { getInfoUser } from '../../../../services/User/getInfoUser';
 
 function Sidebar() {
     // test active
     let active = false;
     const [logout, { isLoading }] = useLogoutMutation();
     const [cookies, setCookie] = useCookies(['jwt']);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const jwtToken = cookies.jwt;
+    const jwtDecode = jwt(jwtToken);
     const navigate = useNavigate();
+    useEffect(() => {
+        const fetchCurrentUser = async () => {
+            const user = await getInfoUser(jwtDecode.id);
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+        };
+        fetchCurrentUser();
+    });
     const hanldeLogout = async () => {
         try {
-            await logout({ id: jwt(jwtToken).id, jwt: jwtToken }).unwrap();
+            await logout({ id: jwtDecode.id, jwt: jwtToken }).unwrap();
             navigate('/login');
         } catch (error) {
             console.log(error);
@@ -111,13 +124,15 @@ function Sidebar() {
                     <img className="w-[45px] h-[45px] rounded-lg" alt="avatar" src="/images/fake-avatar.png" />
                     <div className="flex-1 flex justify-center items-center">
                         <div className="flex flex-col justify-center text-sm flex-1 ml-[20px]">
-                            <span className="text-white">Back Officer</span>
+                            <span className="text-white">
+                                {firstName} {lastName}
+                            </span>
                             <span className="text-[#99B2C6]">Free Account</span>
                         </div>
                         <FontAwesomeIcon
                             onClick={hanldeLogout}
                             icon={faRightFromBracket}
-                            className="text-white text-xl"
+                            className="text-white text-xl p-[10px] hover:cursor-pointer hover:text-[#605CFF]"
                         />
                     </div>
                 </div>
