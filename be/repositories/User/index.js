@@ -12,9 +12,9 @@ module.exports = {
       console.log(error);
     }
   },
-  async findById(id) {
+  async findById(id, scope = "defaultScope") {
     try {
-      const user = await db.User.findOne({
+      const user = await db.User.scope(scope).findOne({
         where: {
           id: id,
         },
@@ -24,9 +24,9 @@ module.exports = {
       console.log(error);
     }
   },
-  async findByEmail(email) {
+  async findByEmail(email, scope = "defaultScope") {
     try {
-      const user = await db.User.findOne({
+      const user = await db.User.scope(scope).findOne({
         where: {
           email,
         },

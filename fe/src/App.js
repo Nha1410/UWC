@@ -26,7 +26,6 @@ function App() {
         console.log(user);
         dispatch(setCredentials({ email: user.email, id: user.id, accessToken: cookies.jwt }));
     }
-    console.log('sdfsdfdfsdf');
     return (
         <CookiesProvider>
             <Router>

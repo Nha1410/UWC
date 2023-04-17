@@ -52,7 +52,17 @@ module.exports = {
   },
   async getInfomationOfUser(id) {
     try {
-      const user = userRepo.findById(id);
+      const user = await userRepo.findById(id, "sensitive");
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async deleteRefreshTokenOfUser(id) {
+    try {
+      let user = await userRepo.findById(id);
+      await user.update({ refreshToken: null });
+      user = await user.save;
       return user;
     } catch (error) {
       console.log(error);
