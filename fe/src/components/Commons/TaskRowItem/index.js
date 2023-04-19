@@ -15,6 +15,7 @@ function TaskRowItem({
     useFor,
     location,
     time,
+    position = 'default desciption',
 }) {
     return (
         <div className="flex flex-row w-full h-[60px] justify-around text-white text-[14px] font-light bg-[#364153] rounded-[10px] mt-[10px] items-center">
@@ -34,9 +35,9 @@ function TaskRowItem({
                 <li>
                     {/* <FontAwesomeIcon className="text-[#605CFF]" icon={icon({ name: 'envelope' })} /> */}
                     <span className="ml-[5px]">{isVehicle && useFor}</span>
-                    <span className="ml-[5px]">{(isStaff || isTask) && 'short decription'}</span>
+                    <span className="ml-[5px]">{(isStaff || isTask) && position}</span>
                 </li>
-                <li>
+                <li className="flex items-center justify-left">
                     <FontAwesomeIcon className="text-[#2FE6A7]" icon={icon({ name: 'calendar-days' })} />
                     <span className="ml-[5px]">
                         {' '}

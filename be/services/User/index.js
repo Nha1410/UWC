@@ -68,4 +68,20 @@ module.exports = {
       console.log(error);
     }
   },
+  async getUsersByRoleCode(roleCode, limit) {
+    try {
+      const users = await userRepo.findByRole(roleCode, limit, "sensitive");
+      return users;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async getAllUsers() {
+    try {
+      const users = await userRepo.findAllUsers();
+      return users;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

@@ -1,8 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import TaskRowItem from '../../components/Commons/TaskRowItem';
+import { useEffect, useState } from 'react';
+import { getAllUsers } from '../../services/User/getAllUsers';
 function StaffManagement() {
     let isStaff = true;
+
+    const [users, setUsers] = useState([]);
+    const [roles, setRoles] = useState();
+    useEffect(() => {
+        const fetchAllUsers = async () => {
+            const res = await getAllUsers();
+            console.log(res);
+            setUsers(res.data);
+            setRoles(res.roles);
+        };
+        fetchAllUsers();
+    }, []);
+
     return (
         <div className="w-full h-full bg-[#1A202C] pb-[30px]">
             <div className="pt-[35px]">
@@ -37,7 +52,22 @@ function StaffManagement() {
                         </li>
                     </ul>
                 </div>
-                <TaskRowItem
+                {users.map((user, index) => {
+                    return (
+                        <TaskRowItem
+                            position={roles[user.role]}
+                            isStaff={true}
+                            key={user.id}
+                            name={user.firstName + user.lastName}
+                            id={user.id}
+                            bgColor="#35515b"
+                            textColor="#2FE6A7"
+                            textContent="Availabel"
+                            phone={user.phone}
+                        />
+                    );
+                })}
+                {/* <TaskRowItem
                     isStaff={isStaff}
                     name="Robert Bacins"
                     id="1"
@@ -108,7 +138,7 @@ function StaffManagement() {
                     textColor="#FF69B4"
                     textContent="Not availabel"
                     phone="0913121234"
-                />
+                /> */}
             </div>
         </div>
     );

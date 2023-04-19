@@ -7,5 +7,7 @@ router.post("/register", UserRestController.register);
 router.post("/login", UserRestController.login);
 router.get("/info/:id", UserRestController.getInfoUser);
 router.post("/logout", UserRestController.logOut);
+router.get("/users-by-role", UserRestController.getUserByRole);
+router.get("/all", UserRestController.getAllUsers);
 
 module.exports = router;

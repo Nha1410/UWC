@@ -77,6 +77,7 @@ function Sidebar() {
                     firstName,
                     lastName,
                     password,
+                    role: 1,
                 };
 
                 const user = await register({ ...userData }).unwrap();

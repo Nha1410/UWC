@@ -7,7 +7,6 @@ module.exports = {
       const user = await db.User.create({
         ...userInfo,
       });
-      console.log(user);
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +45,32 @@ module.exports = {
       return user;
     } catch (error) {
       console.log(error);
+    }
+  },
+  async findByRole(roleCode, limit, scope = "defaultScope") {
+    try {
+      const params = limit
+        ? {
+            where: {
+              role: roleCode,
+            },
+            limit,
+          }
+        : {
+            where: {
+              role: roleCode,
+            },
+          };
+      const users = await db.User.scope(scope).findAll(params);
+      return users;
+    } catch (error) {}
+  },
+  async findAllUsers() {
+    try {
+      const users = await db.User.scope("sensitive").findAll();
+      return users;
+    } catch (error) {
+      console.log(Error);
     }
   },
 };

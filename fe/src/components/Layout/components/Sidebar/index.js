@@ -28,6 +28,7 @@ function Sidebar() {
     const [cookies, setCookie] = useCookies(['jwt']);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [roleName, setRoleName] = useState('');
     const jwtToken = cookies.jwt;
     const jwtDecode = jwt(jwtToken);
     const navigate = useNavigate();
@@ -35,6 +36,7 @@ function Sidebar() {
         const fetchCurrentUser = async () => {
             const user = await getInfoUser(jwtDecode.id);
             setFirstName(user.firstName);
+            setRoleName(user.role);
             setLastName(user.lastName);
         };
         fetchCurrentUser();
@@ -127,7 +129,7 @@ function Sidebar() {
                             <span className="text-white">
                                 {firstName} {lastName}
                             </span>
-                            <span className="text-[#99B2C6]">Free Account</span>
+                            <span className="text-[#99B2C6]">{roleName}</span>
                         </div>
                         <FontAwesomeIcon
                             onClick={hanldeLogout}
