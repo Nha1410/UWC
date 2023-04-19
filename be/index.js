@@ -24,13 +24,6 @@ try {
   console.log(error);
 }
 route(app);
-// userService.createNewUser({
-//   firstName: "Vuong",
-//   lastName: "Nguyen",
-//   phone: "0329721147",
-//   email: "vanvuong24072001@gmail.com",
-//   password: "12345678",
-// });
 // console.log(userService.getInfomationOfUser(1));
 // console.log(userService.findUserByEmail("vanvuong24072001@gmail.com"));
 

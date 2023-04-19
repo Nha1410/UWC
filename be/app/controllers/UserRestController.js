@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const userService = require("../../services/User");
+const roleService = require("../../services/Role");
+const { mappingRole } = require("../util");
 
 module.exports = {
   // test rest controller
@@ -9,7 +11,7 @@ module.exports = {
 
   // [POST] register a user
   async register(req, res) {
-    const { password, firstName, lastName, phone, email } = req.body;
+    const { password, firstName, lastName, phone, email, role } = req.body;
 
     if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
 
@@ -25,6 +27,7 @@ module.exports = {
         firstName,
         lastName,
         password,
+        role,
       });
       console.log(user);
 
@@ -44,7 +47,7 @@ module.exports = {
     if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
 
     const foundUser = await userService.findUserByEmail(email);
-    console.log("sdkjflsjdfjslkdf", foundUser.password);
+
     if (!foundUser) return res.sendStatus(401); //Unauthorized
 
     // evaluate password
@@ -70,6 +73,8 @@ module.exports = {
     const userId = req.params.id;
     if (!userId) res.status(400).json({ message: "id is required" });
     const user = await userService.getInfomationOfUser(userId);
+    const roleName = await roleService.getNameRoleByCode(user.role);
+    user.role = roleName;
     return res.json(user);
   },
 
@@ -86,5 +91,19 @@ module.exports = {
     } else {
       res.status(400).json({ message: "User not exist" });
     }
+  },
+
+  // [GET] 8 janitor and collector for dashboard
+  async getUserByRole(req, res) {
+    const roleCode = parseInt(req.query.role);
+    const limit = parseInt(req.query.limit);
+    const users = await userService.getUsersByRoleCode(roleCode, limit, "sensitive");
+    return res.json(users);
+  },
+
+  // [GET] all users
+  async getAllUsers(req, res) {
+    const users = await userService.getAllUsers();
+    return res.json({ data: users, roles: mappingRole });
   },
 };

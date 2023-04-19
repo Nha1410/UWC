@@ -35,6 +35,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      status: {
+        type: DataTypes.BOOLEAN,
+      },
+      timePerMonth: {
+        type: DataTypes.INTEGER,
+      },
+      currentMCP: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      role: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
