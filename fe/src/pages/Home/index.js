@@ -4,92 +4,29 @@ import BoxContent from '../../components/Commons/DashboardBoxContent';
 import BoxItem from '../../components/Commons/DashboardBoxInfor';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../components/Commons/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BoxInfo from '../../components/Commons/DashboardVehicleInfo';
+import { getUsersyRole } from '../../services/User/getUsersByRole';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentToken, selectCurrentUser } from '../../services/Auth/AuthSlice';
 import jwt from 'jwt-decode';
 
 function Home() {
-    console.log('sdfsdfsdfsdf');
-    // const user = useSelector(selectCurrentUser);
-    // const token = useSelector(selectCurrentToken);
-
-    // const userAuthSuccess = user ? `Hello ${user}` : 'Hello';
-    // const tokenAuthSuccess = `${token.slice(0, 9)}...`;
-
-    // console.log('sdf');
-    // console.log(userAuthSuccess, ' ', tokenAuthSuccess);
-
-    const [janitors, setJanitors] = useState([
-        {
-            id: '876364',
-            name: 'Jonhson',
-            avatar: 'in future',
-            status: 1,
-            mcp: 'MCP 1',
-            area: 'District 1',
-            timePerMonth: 123,
-        },
-        {
-            id: '876368',
-            name: 'Petter',
-            avatar: 'in future',
-            status: 0,
-            mcp: null,
-            area: null,
-            timePerMonth: 124,
-        },
-        {
-            id: '876412',
-            name: 'Vecent',
-            avatar: 'in future',
-            status: 0,
-            mcp: null,
-            area: null,
-            timePerMonth: 125,
-        },
-        {
-            id: '876364',
-            name: 'Jonhson',
-            avatar: 'in future',
-            status: 1,
-            mcp: 'MCP 1',
-            area: 'District 1',
-            timePerMonth: 123,
-        },
-    ]);
-    const [collectors, setCollectors] = useState([
-        {
-            id: '876364',
-            name: 'Jonhson',
-            avatar: 'in future',
-            status: 1,
-            currentVehicle: 'Truct 8',
-            timePerMonth: 123,
-        },
-        {
-            id: '876368',
-            name: 'Petter',
-            avatar: 'in future',
-            status: 0,
-            currentVehicle: null,
-            timePerMonth: 124,
-        },
-        {
-            id: '876412',
-            name: 'Vecent',
-            avatar: 'in future',
-            status: 0,
-            currentVehicle: null,
-            timePerMonth: 125,
-        },
-    ]);
-    // const dataTime = () => {
-    //     const date = new Date();
-
-    // }
+    const [janitors, setJanitors] = useState([]);
+    const [collectors, setCollectors] = useState([]);
+    useEffect(() => {
+        const fetchUsersWithRolJanitor = async () => {
+            const users = await getUsersyRole(3, 4);
+            setJanitors(users);
+        };
+        const fetchUsersWithRoleCollector = async () => {
+            const users = await getUsersyRole(2, 4);
+            setCollectors(users);
+        };
+        fetchUsersWithRolJanitor();
+        fetchUsersWithRoleCollector();
+    }, []);
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -170,7 +107,9 @@ function Home() {
                                                 <th className="flex justify-left items-center w-1/4">
                                                     <div className="flex justify-center items-center">
                                                         <img alt="avatar" src="/images/fake-avatar-janitor.png" />
-                                                        <span className="w-full ml-[10px]">{janitor.name}</span>
+                                                        <span className="w-full ml-[10px]">
+                                                            {janitor.firstName + janitor.lastName}
+                                                        </span>
                                                     </div>
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/6">
@@ -183,8 +122,8 @@ function Home() {
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/5">
                                                     <div className="flex flex-col items-center justify-center">
-                                                        <span>{janitor.mcp ?? '-'}</span>
-                                                        <span>{janitor.area ?? '-'}</span>
+                                                        <span>{janitor.currentMCP ?? '-'}</span>
+                                                        <span>{janitor.currentLocation ?? '-'}</span>
                                                     </div>
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/6">
@@ -223,7 +162,7 @@ function Home() {
                                     </th>
                                     <th className="flex justify-center items-center w-1/4">
                                         <span className="w-full">
-                                            Current Vehicle{' '}
+                                            Status{' '}
                                             <FontAwesomeIcon icon={faAngleDown} className="text-white pl-[10px]" />
                                         </span>
                                     </th>
@@ -256,7 +195,9 @@ function Home() {
                                                 <th className="flex justify-left items-center w-1/4">
                                                     <div className="flex justify-center items-center">
                                                         <img alt="avatar" src="/images/fake-avatar-janitor.png" />
-                                                        <span className="w-full ml-[10px]">{collector.name}</span>
+                                                        <span className="w-full ml-[10px]">
+                                                            {collector.firstName + collector.lastName}
+                                                        </span>
                                                     </div>
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/4">
@@ -268,7 +209,7 @@ function Home() {
                                                     />
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/4">
-                                                    <span className="">{collector.currentVehicle ?? '-'}</span>
+                                                    <span className="">{collector.currentMCP ?? '-'}</span>
                                                 </th>
                                                 <th className="flex justify-center items-center w-1/4">
                                                     <span className="w-full">{collector.timePerMonth}</span>
