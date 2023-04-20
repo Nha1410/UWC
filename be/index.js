@@ -11,6 +11,7 @@ const credentials = require("./config/credentials");
 
 const app = express();
 const port = process.env.PORT;
+app.use(express.static("public"));
 app.use(credentials);
 // Cross Origin Resource Sharing
 app.use(cors(corsOptions));

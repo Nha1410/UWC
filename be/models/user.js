@@ -48,6 +48,10 @@ module.exports = (sequelize, DataTypes) => {
       role: {
         type: DataTypes.INTEGER,
       },
+      avatar: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       sequelize,

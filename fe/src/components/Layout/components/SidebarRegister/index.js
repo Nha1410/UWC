@@ -3,6 +3,7 @@ import InputForm from '../../../InputForm';
 import Button from '../../../Commons/Button';
 import { Link } from 'react-router-dom';
 import { useRegisterMutation } from '../../../../services/Auth/registerApiSlice';
+import axios from 'axios';
 
 function SideBarRegister({ toogleMenu }) {
     const [register, { isLoading }] = useRegisterMutation();
@@ -12,13 +13,17 @@ function SideBarRegister({ toogleMenu }) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [file, setFile] = useState();
+    const [role, setRole] = useState(3);
 
     const [errEmail, setErrEmail] = useState();
     const [errFirstName, setErrFirstName] = useState();
     const [errLastName, setErrLastName] = useState();
     const [errPassword, setErrPassword] = useState();
+    const [preview, setPreview] = useState();
 
     const userRef = useRef();
+    const fileRef = useRef();
 
     useEffect(() => {
         userRef.current.focus();
@@ -76,19 +81,65 @@ function SideBarRegister({ toogleMenu }) {
                     firstName,
                     lastName,
                     password,
-                    role: 1,
+                    role: 3,
+                    file,
                 };
 
-                // const user = await register({ ...userData }).unwrap();
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('email', email);
+                formData.append('firstName', firstName);
+                formData.append('lastName', lastName);
+                formData.append('password', password);
+                formData.append('role', role);
+                const user = axios.post('http://localhost:5001/api/user/register', formData, {
+                    headers: { 'Content-Type': `multipart/form-data; boundary=Boundary-${new Date().getTime()}}` },
+                });
+                console.log(user);
+                // const user = await register({ formData }).unwrap();
                 setEmail('');
                 setFirstName('');
                 setLastName('');
                 setPassword('');
                 setConfirmPassword('');
+                toogleMenu();
             } catch (error) {
                 console.log(error);
             }
         }
+    };
+
+    const handleChange = (e) => {
+        e.target.files[0] && setFile(e.target.files[0]);
+    };
+
+    useEffect(() => {
+        if (fileRef.current) {
+            fileRef.current.addEventListener('change', handleChange);
+        }
+        return () => {
+            if (fileRef.current) {
+                fileRef.current.removeEventListener('change', handleChange);
+            }
+        };
+    }, [fileRef]);
+
+    useEffect(() => {
+        if (!file) {
+            setPreview(undefined);
+            return;
+        }
+
+        const objectUrl = URL.createObjectURL(file);
+        setPreview(objectUrl);
+    }, [file]);
+
+    const handleClickUploadAvatar = () => {
+        fileRef.current.click();
+    };
+
+    const handleRoleChange = (e) => {
+        setRole(Number(e.target.value));
     };
 
     return (
@@ -102,8 +153,14 @@ function SideBarRegister({ toogleMenu }) {
                     src="/images/close-icon.png"
                 />
             </div>
-            <div className="my-[50px]">
-                <img src="images/upload-avatar-icon.png" />
+            <div className="my-[50px] hover:cursor-pointer hover:opacity-70">
+                <input type="file" ref={fileRef} className="hidden" />
+                <img
+                    onClick={handleClickUploadAvatar}
+                    alt="upload"
+                    src={preview || 'images/upload-avatar-icon.png'}
+                    className="w-150[px] h-[150px] object-fill"
+                />
             </div>
             <div className="flex flex-col items-center">
                 <div className="flex flex-col">
@@ -151,7 +208,7 @@ function SideBarRegister({ toogleMenu }) {
                         nameLabel="Password"
                         valueInput={password}
                         handleOnChange={handlePasswordInput}
-                        placeholder="Your password"
+                        placeholder="Password of User"
                         width="w-96"
                         height="h-[50px]"
                         type="password"
@@ -170,6 +227,16 @@ function SideBarRegister({ toogleMenu }) {
                         height="h-[50px]"
                         type="password"
                     />
+                </div>
+                <div className="mt-[40px] w-full text-lg">
+                    <label>
+                        <input type="radio" name="role" value="3" checked={role === 3} onChange={handleRoleChange} />
+                        Janitor
+                    </label>
+                    <label className="ml-[30px]">
+                        <input type="radio" name="role" value="2" checked={role === 2} onChange={handleRoleChange} />
+                        Collector
+                    </label>
                 </div>
                 <div
                     className="mt-[70px] hover:cursor-pointer hover:opacity-90 hover:-translate-y-1 hover:scale-105 transition ease-in-out delay-150"

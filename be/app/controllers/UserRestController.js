@@ -13,6 +13,7 @@ module.exports = {
   async register(req, res) {
     const { password, firstName, lastName, phone, email, role } = req.body;
 
+    console.log(req.file);
     if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
 
     // check for duplicate usernames in the db
@@ -28,8 +29,8 @@ module.exports = {
         lastName,
         password,
         role,
+        avatar: req.file ? req.file.filename : null,
       });
-      console.log(user);
 
       res.status(201).json({ success: `New user created!` });
     } catch (err) {
