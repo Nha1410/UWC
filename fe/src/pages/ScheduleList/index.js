@@ -166,9 +166,9 @@ function ScheduleList() {
                                                     type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}
                                                 ></input>
                                             </div>
-                                            <div className="flex justify-start z-0 gap-[1rem]">
-                                                <p className="flex justify-center z-0 items-center h-[40px] w-[40px] rounded-[20px] bg-[#FF69B4] opacity-20"></p>
-                                                <p className="min-w-[40px] absolute z-0 flex justify-center items-center h-[40px] w-[40px] rounded-[20px]">
+                                            <div className="flex justify-start gap-[1rem]">
+                                                <p className="flex justify-center items-center h-[40px] w-[40px] rounded-[20px] bg-[#FF69B4] opacity-20"></p>
+                                                <p className="min-w-[40px] absolute flex justify-center items-center h-[40px] w-[40px] rounded-[20px]">
                                                     <FontAwesomeIcon
                                                         className="h-[16px] w-[16px] opacity-100 z-0 text-[#FF69B4]"
                                                         icon={faClock}

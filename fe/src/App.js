@@ -10,6 +10,7 @@ import SidebarLogin from './components/Layout/components/SidebarAuth/Login';
 import SidebarSignUp from './components/Layout/components/SidebarAuth/Signup';
 import RequireAuth from './services/Auth/RequireAuth';
 import VehicalManagement from './pages/VehicleManagement';
+import RouteManagement from './pages/RouteManagement';
 import ScheduleList from './pages/ScheduleList';
 import { CookiesProvider } from 'react-cookie';
 import { useCookies } from 'react-cookie';
@@ -88,6 +89,14 @@ function App() {
                             element={
                                 <DefaultLayout>
                                     <ScheduleList />
+                                </DefaultLayout>
+                            }
+                        />
+                        <Route
+                            path="/route-management"
+                            element={
+                                <DefaultLayout>
+                                    <RouteManagement />
                                 </DefaultLayout>
                             }
                         />
