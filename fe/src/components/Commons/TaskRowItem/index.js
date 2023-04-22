@@ -15,6 +15,7 @@ function TaskRowItem({
     useFor,
     location,
     time,
+    vehicle,
     position = 'default desciption',
 }) {
     return (
@@ -22,7 +23,7 @@ function TaskRowItem({
             <input type="checkbox" className="flex ml-[20px] w-[20px] h-[20px] bg-transparent" />
             <ul className="w-full flex justify-around ml-[30px] h-full items-center">
                 <li>#{id}</li>
-                <li>{isSchedule && date}</li>
+                <li>{isSchedule && 'Garbage Trucks'}</li>
                 <li className="flex flex-row items-center w-[170px] ">
                     <div className="flex items-center justify-center bg-[#605cff] w-[36px] h-[36px] rounded-full ml-[5px]">
                         <FontAwesomeIcon className="text-white" icon={icon({ name: 'user' })} />
@@ -44,6 +45,7 @@ function TaskRowItem({
                         {isStaff && phone}
                         {isTask && date}
                         {isVehicle && location}
+                        {isSchedule && date}
                     </span>
                 </li>
                 <li>

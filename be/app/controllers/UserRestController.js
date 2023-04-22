@@ -42,9 +42,9 @@ module.exports = {
   // [POST] login a user
   async login(req, res) {
     const cookies = req.cookies;
-    console.log(req.body);
+    // console.log(req.body);
     const { email, password } = req.body;
-    console.log(email, password);
+    // console.log(email, password);
     if (!email || !password) return res.status(400).json({ message: "Username and password are required." });
 
     const foundUser = await userService.findUserByEmail(email);
