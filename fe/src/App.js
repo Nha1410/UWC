@@ -32,7 +32,7 @@ function App() {
             <Router>
                 <div className="App">
                     <Routes>
-                        <Route element={<RequireAuth />}>
+                        <Route element={<RequireAuth isHomePage={true} />}>
                             <Route
                                 path="/"
                                 element={
@@ -68,38 +68,36 @@ function App() {
                                 }
                             />
                         </Route>
-                        <Route
-                            path="/staff-management"
-                            element={
-                                <DefaultLayout>
-                                    <StaffManagement />
-                                </DefaultLayout>
-                            }
-                        />
-                        <Route
-                            path="/vehicle-management"
-                            element={
-                                <DefaultLayout>
-                                    <VehicalManagement />
-                                </DefaultLayout>
-                            }
-                        />
-                        <Route
-                            path="/schedule-list"
-                            element={
-                                <DefaultLayout>
-                                    <ScheduleList />
-                                </DefaultLayout>
-                            }
-                        />
-                        <Route
-                            path="/route-management"
-                            element={
-                                <DefaultLayout>
-                                    <RouteManagement />
-                                </DefaultLayout>
-                            }
-                        />
+                        <Route element={<RequireAuth />}>
+                            <Route
+                                path="/staff-management"
+                                element={
+                                    <DefaultLayout>
+                                        <StaffManagement />
+                                    </DefaultLayout>
+                                }
+                            />
+                        </Route>
+                        <Route element={<RequireAuth />}>
+                            <Route
+                                path="/vehicle-management"
+                                element={
+                                    <DefaultLayout>
+                                        <VehicalManagement />
+                                    </DefaultLayout>
+                                }
+                            />
+                        </Route>
+                        <Route element={<RequireAuth />}>
+                            <Route
+                                path="/schedule-list"
+                                element={
+                                    <DefaultLayout>
+                                        <ScheduleList />
+                                    </DefaultLayout>
+                                }
+                            />
+                        </Route>
                     </Routes>
                 </div>
             </Router>

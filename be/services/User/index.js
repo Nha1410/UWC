@@ -35,9 +35,13 @@ module.exports = {
       { expiresIn: "10s" },
     );
 
-    const newRefreshToken = jwt.sign({ id: foundUser.id, email: foundUser.email }, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "15s",
-    });
+    const newRefreshToken = jwt.sign(
+      { id: foundUser.id, email: foundUser.email, role: foundUser.role },
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: "15s",
+      },
+    );
 
     if (cookies?.jwt) {
       res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
