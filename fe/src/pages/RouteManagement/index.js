@@ -51,7 +51,6 @@ function RouteManagement() {
     const [showElement, setShowElement] = useState(false);
     function showRoute(item) {
         setShowElement(true);
-        console.log(pathCoordinates);
         const newPathCoordinates = [
             { lat: parseFloat(item.beginX), lng: parseFloat(item.beginY) },
             { lat: parseFloat(item.endX), lng: parseFloat(item.endY) },
