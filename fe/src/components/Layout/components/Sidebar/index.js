@@ -31,6 +31,7 @@ function Sidebar() {
     const [roleName, setRoleName] = useState('');
     const jwtToken = cookies.jwt;
     const jwtDecode = jwt(jwtToken);
+    const role = jwtDecode.role;
     const navigate = useNavigate();
     useEffect(() => {
         const fetchCurrentUser = async () => {
@@ -66,32 +67,36 @@ function Sidebar() {
                                 iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to="/staff-management">
+                        <Link to={`${role !== 1 ? '#' : '/staff-management'}`}>
                             <BoxItem
+                                isEnable={role !== 1 ? false : true}
                                 title="Quản lý nhân sự"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
                                 iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to="/task-management">
+                        <Link to={`${role !== 1 ? '#' : '/task-management'}`}>
                             <BoxItem
+                                isEnable={role !== 1 ? false : true}
                                 title="Quản lý nhiệm vụ"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
                                 iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to="/schedule-list">
+                        <Link to={`${role !== 1 ? '#' : '/schedule-list'}`}>
                             <BoxItem
+                                isEnable={role !== 1 ? false : true}
                                 title="Tạo nhiệm vụ"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
                                 iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to="/vehicle-management">
+                        <Link to={`${role !== 1 ? '#' : '/vehicle-management'}`}>
                             <BoxItem
+                                isEnable={role !== 1 ? false : true}
                                 title="Quản lý phương tiện"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
@@ -99,6 +104,7 @@ function Sidebar() {
                             />
                         </Link>
                         <BoxItem
+                            isEnable={role !== 1 ? false : true}
                             title="Tin nhắn"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
@@ -106,12 +112,14 @@ function Sidebar() {
                             iconComponent={<FontAwesomeIcon icon={faMessage} className="mr-[5px]" />}
                         />
                         <BoxItem
+                            isEnable={role !== 1 ? false : true}
                             title="Thông báo"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
                             iconComponent={<FontAwesomeIcon icon={faBell} className="mr-[5px]" />}
                         />
                         <BoxItem
+                            isEnable={role !== 1 ? false : true}
                             title="Cài đặt"
                             textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                             isActive={active}
