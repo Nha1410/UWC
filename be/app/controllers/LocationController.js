@@ -24,9 +24,9 @@ module.exports = {
     async fetch(req, res) {
         try {
             //fetch data for staff 
-            const task = await TaskService.getAllTask();
-            console.log(task);
-            res.status(200).json(task);
+            const location = await locationService.getAllLocation();
+            console.log(location);
+            res.status(200).json(location);
             // res.status(201).json({ success: `get all staff success!` });
         } catch (err) {
             console.log(err);

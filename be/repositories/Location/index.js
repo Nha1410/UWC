@@ -3,9 +3,9 @@ const db = require("../../models");
 module.exports = {
     async fetch() {
         try {
-            const task = await db.Task.findAll();
-            console.log(task);
-            return task;
+            const location = await db.Location.findAll();
+            console.log(location);
+            return location;
         } catch (error) {
             console.log(error);
         }

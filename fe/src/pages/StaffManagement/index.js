@@ -68,7 +68,7 @@ function StaffManagement() {
                         <ul className="w-full flex justify-around">
                             <li>Staff Id</li>
                             <li className="relative right-[30px]">Name</li>
-                            <li>Position</li>
+                            <li className="relative left-[30px]">Position</li>
                             <li>phone</li>
                             <li className="relative left-[30px]">Status</li>
                             <li className="relative left-[30px]"></li>
@@ -104,9 +104,8 @@ function StaffManagement() {
             </div>
             {isCreateUser && (
                 <div
-                    className={`min-w-[20%] h-screen overflow-auto bg-[#364153] py-[30px] top-0 right-0 fixed z-60 rounded-l-lg flex items-center justify-center ease-in-out duration-300 ${
-                        isCreateUser ? 'translate-x-0 ' : 'translate-x-full'
-                    }`}
+                    className={`min-w-[20%] h-screen overflow-auto bg-[#364153] py-[30px] top-0 right-0 fixed z-60 rounded-l-lg flex items-center justify-center ease-in-out duration-300 ${isCreateUser ? 'translate-x-0 ' : 'translate-x-full'
+                        }`}
                 >
                     <SideBarRegister toogleMenu={handleOpenCreatUserMenu} />
                 </div>

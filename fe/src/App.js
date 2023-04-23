@@ -60,10 +60,10 @@ function App() {
                         />
                         <Route element={<RequireAuth />}>
                             <Route
-                                path="/task-management"
+                                path="/route-management"
                                 element={
                                     <DefaultLayout>
-                                        <TaskManagement />
+                                        <RouteManagement />
                                     </DefaultLayout>
                                 }
                             />

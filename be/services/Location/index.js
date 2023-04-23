@@ -1,7 +1,7 @@
 const locationRepo = require("../../repositories/Location");
 
 module.exports = {
-    async getAllTask() {
+    async getAllLocation() {
         const location = await locationRepo.fetch();
         return location;
     },

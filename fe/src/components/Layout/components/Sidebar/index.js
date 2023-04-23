@@ -76,10 +76,10 @@ function Sidebar() {
                                 iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to={`${role !== 1 ? '#' : '/task-management'}`}>
+                        <Link to={`${role !== 1 ? '#' : '/route-management'}`}>
                             <BoxItem
                                 isEnable={role !== 1 ? false : true}
-                                title="Quản lý nhiệm vụ"
+                                title="Quản lý tuyến đường"
                                 textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                 isActive={active}
                                 iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
