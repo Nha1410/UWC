@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { BACKEND_DOMAIN } from '../../../utils/api';
 function TaskRowItem({
     name,
     isStaff,
@@ -14,6 +15,7 @@ function TaskRowItem({
     date,
     useFor,
     location,
+    src,
     time,
     vehicle,
     position = 'default desciption',
@@ -25,10 +27,12 @@ function TaskRowItem({
                 <li>#{id}</li>
                 <li>{isSchedule && 'Garbage Trucks'}</li>
                 <li className="flex flex-row items-center w-[170px] ">
-                    <div className="flex items-center justify-center bg-[#605cff] w-[36px] h-[36px] rounded-full ml-[5px]">
-                        <FontAwesomeIcon className="text-white" icon={icon({ name: 'user' })} />
-                        {/* <FontAwesomeIcon className="text-white" icon={icon({ name: 'truck' })} /> */}
-                        {/* <FontAwesomeIcon className="text-white" icon={icon({ name: 'clock' })} /> */}
+                    <div className="flex items-center justify-center bg-[#605cff] w-[36px] h-[36px] rounded-full ml-[5px] object-contain">
+                        {src ? (
+                            <img src={`${BACKEND_DOMAIN}avatars/${src}`} className="rounded-full w-[30px] h-[30px]" />
+                        ) : (
+                            <FontAwesomeIcon className="text-white" icon={icon({ name: 'user' })} />
+                        )}
                     </div>
                     <span className="ml-[5px]"> {name}</span>
                     <span className="ml-[5px]"> {time}</span>
@@ -63,8 +67,8 @@ function TaskRowItem({
                         </div>
                     </div>
                 </li>
-                <li>
-                    <FontAwesomeIcon icon={icon({ name: 'ellipsis' })} />
+                <li className="hover:cursor-pointer hover:opacity-70 px-[5px]">
+                    <FontAwesomeIcon icon={icon({ name: 'trash' })} />
                 </li>
             </ul>
         </div>

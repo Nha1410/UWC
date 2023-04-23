@@ -1,19 +1,33 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import TaskRowItem from '../../components/Commons/TaskRowItem';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getAllUsers } from '../../services/User/getAllUsers';
 import SideBarRegister from '../../components/Layout/components/SidebarRegister';
+import { PaginationNav1, PaginationNav1Presentation } from '../../components/Commons/Pagination';
+
 function StaffManagement() {
-    let isStaff = true;
+    const itemsPerPage = 5;
+
+    const [pageCount, setPageCount] = useState(10);
+    const [pageIndex, setPageIndex] = useState(0);
 
     const [users, setUsers] = useState([]);
     const [roles, setRoles] = useState();
     const [isCreateUser, setIsCreateUser] = useState();
+    const [usersPagination, setUsersPagination] = useState([]);
+
+    useEffect(() => {
+        const totalUsers = users.length;
+        setPageCount(Math.ceil(totalUsers / itemsPerPage));
+        const mark = pageIndex * itemsPerPage;
+        setUsersPagination(users.slice(mark, Math.min(mark + itemsPerPage, totalUsers)));
+        // console.log(mark, mark + itemsPerPage);
+    }, [pageIndex, users]);
+
     useEffect(() => {
         const fetchAllUsers = async () => {
             const res = await getAllUsers();
-            console.log(res);
             setUsers(res.data);
             setRoles(res.roles);
         };
@@ -57,26 +71,35 @@ function StaffManagement() {
                             <li>Position</li>
                             <li>phone</li>
                             <li className="relative left-[30px]">Status</li>
-                            <li className="relative left-[30px]">
-                                <FontAwesomeIcon icon={icon({ name: 'trash' })} />
-                            </li>
+                            <li className="relative left-[30px]"></li>
                         </ul>
                     </div>
-                    {users.map((user, index) => {
+                    {usersPagination.map((user, index) => {
                         return (
                             <TaskRowItem
                                 position={roles[user.role]}
                                 isStaff={true}
+                                src={user.avatar}
                                 key={user.id}
                                 name={user.firstName + user.lastName}
+                                status={user.status}
                                 id={user.id}
                                 bgColor="#35515b"
-                                textColor="#2FE6A7"
-                                textContent="Availabel"
+                                textColor={`${user.status ? '#5CD8FF' : '#FF5C7A'}`}
+                                textContent={`${user.status ? 'Active' : 'Inactive'}`}
                                 phone={user.phone}
                             />
                         );
                     })}
+                </div>
+                <div className="pt-[35px] mx-[30px] flex gap-3 flex-wrap justify-end">
+                    <PaginationNav1
+                        gotoPage={setPageIndex}
+                        canPreviousPage={pageIndex > 0}
+                        canNextPage={pageIndex < pageCount - 1}
+                        pageCount={pageCount}
+                        pageIndex={pageIndex}
+                    />
                 </div>
             </div>
             {isCreateUser && (
