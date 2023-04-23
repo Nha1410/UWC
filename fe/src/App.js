@@ -12,6 +12,7 @@ import RequireAuth from './services/Auth/RequireAuth';
 import VehicalManagement from './pages/VehicleManagement';
 import RouteManagement from './pages/RouteManagement';
 import ScheduleList from './pages/ScheduleList';
+import CheckInOut from './pages/CheckInOut';
 import { CookiesProvider } from 'react-cookie';
 import { useCookies } from 'react-cookie';
 import { useSelector } from 'react-redux';
@@ -98,6 +99,14 @@ function App() {
                                 }
                             />
                         </Route>
+                        <Route
+                            path="/check-in-out"
+                            element={
+                                <DefaultLayout>
+                                    <CheckInOut />
+                                </DefaultLayout>
+                            }
+                        />
                     </Routes>
                 </div>
             </Router>

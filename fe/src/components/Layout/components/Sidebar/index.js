@@ -67,42 +67,64 @@ function Sidebar() {
                                 iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
                             />
                         </Link>
-                        <Link to={`${role !== 1 ? '#' : '/staff-management'}`}>
-                            <BoxItem
-                                isEnable={role !== 1 ? false : true}
-                                title="Quản lý nhân sự"
-                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                                isActive={active}
-                                iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
-                            />
+                        <Link to="/check-in-out">
+                            {role !== 1 &&
+                                <BoxItem
+                                    title="Check in out"
+                                    textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                    isActive={active}
+                                    iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}
+                                />
+                            }
                         </Link>
-                        <Link to={`${role !== 1 ? '#' : '/route-management'}`}>
-                            <BoxItem
-                                isEnable={role !== 1 ? false : true}
-                                title="Quản lý tuyến đường"
-                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                                isActive={active}
-                                iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
-                            />
-                        </Link>
-                        <Link to={`${role !== 1 ? '#' : '/schedule-list'}`}>
-                            <BoxItem
-                                isEnable={role !== 1 ? false : true}
-                                title="Tạo nhiệm vụ"
-                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                                isActive={active}
-                                iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
-                            />
-                        </Link>
-                        <Link to={`${role !== 1 ? '#' : '/vehicle-management'}`}>
-                            <BoxItem
-                                isEnable={role !== 1 ? false : true}
-                                title="Quản lý phương tiện"
-                                textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
-                                isActive={active}
-                                iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
-                            />
-                        </Link>
+                        {
+                            role === 1 &&
+                            <Link to={`${role !== 1 ? '#' : '/staff-management'}`}>
+                                <BoxItem
+                                    isEnable={role !== 1 ? false : true}
+                                    title="Quản lý nhân sự"
+                                    textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                    isActive={active}
+                                    iconComponent={<FontAwesomeIcon icon={faPeopleRoof} className="mr-[5px]" />}
+                                />
+                            </Link>
+                        }
+                        {
+                            role === 1 &&
+                            <Link to={`${role !== 1 ? '#' : '/route-management'}`}>
+                                <BoxItem
+                                    isEnable={role !== 1 ? false : true}
+                                    title="Quản lý tuyến đường"
+                                    textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                    isActive={active}
+                                    iconComponent={<FontAwesomeIcon icon={faListCheck} className="mr-[5px]" />}
+                                />
+                            </Link>
+                        }
+                        {
+                            role === 1 &&
+                            <Link to={`${role !== 1 ? '#' : '/schedule-list'}`}>
+                                <BoxItem
+                                    isEnable={role !== 1 ? false : true}
+                                    title="Tạo nhiệm vụ"
+                                    textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                    isActive={active}
+                                    iconComponent={<FontAwesomeIcon icon={faThumbTack} className="mr-[5px]" />}
+                                />
+                            </Link>
+                        }
+                        {
+                            role === 1 &&
+                            <Link to={`${role !== 1 ? '#' : '/vehicle-management'}`}>
+                                <BoxItem
+                                    isEnable={role !== 1 ? false : true}
+                                    title="Quản lý phương tiện"
+                                    textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
+                                    isActive={active}
+                                    iconComponent={<FontAwesomeIcon icon={faBarsProgress} className="mr-[5px]" />}
+                                />
+                            </Link>
+                        }
                         <BoxItem
                             isEnable={role !== 1 ? false : true}
                             title="Tin nhắn"
@@ -147,7 +169,7 @@ function Sidebar() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
