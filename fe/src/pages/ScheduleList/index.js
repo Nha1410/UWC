@@ -176,8 +176,8 @@ function ScheduleList() {
                                                 </p>
                                                 <div className="max-w-[80%]">
                                                     <p className="text-[12px]">
-                                                        <button className="text-[#FF69B4]" selected={startDate} onChange={(date) => setStartDate(date)} >Change time</button>
-                                                        <DatePicker selected={startDate} />
+                                                        <button className="text-[#FF69B4]"  >Change time</button>
+                                                        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                                                     </p>
                                                 </div>
                                             </div>
