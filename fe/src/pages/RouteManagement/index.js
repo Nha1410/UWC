@@ -4,8 +4,12 @@ import TaskRowItem from '../../components/Commons/TaskRowItem';
 import { GoogleMap, useJsApiLoader, Marker, Polyline } from '@react-google-maps/api';
 import { useState } from 'react';
 import React from 'react'
+import { Popup } from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import axios from 'axios';
+
 function RouteManagement() {
-    let isTask = true;
+
     const containerStyle = {
         width: '80%',
         height: '80%'
@@ -42,6 +46,33 @@ function RouteManagement() {
     const closeRoute = async (e) => {
         setShowElement(false);
     }
+
+    const [location, setLoaction] = useState('');
+    const [description, setDescription] = useState('');
+    const [beginX, setBeginX] = useState('');
+    const [beginY, setBeginY] = useState('');
+    const [endX, setEndX] = useState('');
+    const [endY, setEndY] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //     const data = {
+        //         location: location,
+        //         description: description,
+        //         beginX: beginX,
+        //         beginY: beginY,
+        //         endX: endX,
+        //         endY: endY,
+        //     };
+        //     const response = await axios.post('http://localhost:5001/api/location/store', data);
+    }
+    const myStyle = {
+        backgroundColor: 'white',
+        fontSize: '14px',
+        opacity: '80%',
+    }
+
+    let isTask = true;
     return isLoaded ? (
         <>
             {showElement &&
@@ -91,7 +122,46 @@ function RouteManagement() {
                             </div>
                             <div className="flex flex-row w-[122px] h-[40px] bg-[#605CFF] border rounded-[8px] text-white justify-center items-center">
                                 <FontAwesomeIcon icon={icon({ name: 'plus' })} />
-                                <span className="ml-[8px]">Add New</span>
+                                <Popup trigger={<button className="ml-[8px]">Add New</button>} modal>
+                                    <div className="modal flex flex-col gap-[1.5rem] text-[14px]">
+                                        <p className="header">Create New Staff</p>
+                                        <form className='' onSubmit={handleSubmit}>
+                                            <div className='flex flex-col w-full justify-left gap-[20px] pb-[30px]'>
+                                                <label className='w-[100%] flex flex-row items-center'>
+                                                    <span className='w-[20%]'> Location: </span>
+                                                    <input className='w-[75%] h-[30px] rounded p-[5px] text-[#000]'
+                                                        style={myStyle}
+                                                        onChange={(e) => setLoaction(e.target.value)}
+                                                        type="text" name="location"
+                                                    />
+                                                </label>
+                                                <label className='w-[100%] flex flex-row items-center'>
+                                                    <span className='w-[20%]'> Description: </span>
+                                                    <input className='w-[75%] h-[30px] rounded p-[5px] text-[#000]'
+                                                        style={myStyle}
+                                                        type="text" name="description"
+                                                        onChange={(e) => setDescription(e.target.value)}
+                                                    />
+                                                </label>
+                                                <label className='w-[100%] flex flex-row items-center'>
+                                                    <span className='w-[20%]'> MCP X: </span>
+                                                    <input className='w-[30%] h-[30px] rounded p-[5px] text-[#000]' style={myStyle} onChange={(e) => setBeginX(e.target.value)} type="text" name="beginX" />
+                                                    <span className='ml-[12px]'> MCP Y: </span>
+                                                    <input className='w-[30%] h-[30px] rounded p-[5px] text-[#000]' style={myStyle} onChange={(e) => setBeginY(e.target.value)} type="text" name="beginY" />
+                                                </label>
+                                                <label className='w-[100%] flex flex-row items-center'>
+                                                    <span className='w-[20%]'> MCP X: </span>
+                                                    <input className='w-[30%] h-[30px] rounded p-[5px] text-[#000]' style={myStyle} onChange={(e) => setEndX(e.target.value)} type="text" name="endX" />
+                                                    <span className='ml-[12px]'> MCP Y: </span>
+                                                    <input className='w-[30%] h-[30px] rounded p-[5px] text-[#000]' style={myStyle} onChange={(e) => setEndY(e.target.value)} type="text" name="endY" />
+                                                </label>
+                                            </div>
+                                            <button type="submit" value="Submit" className="flex float-right max-w-max bg-[#FF69B4] rounded-[10px] p-[0.7rem] h-[45px] text-[16px]">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </Popup>
                             </div>
                         </div>
                     </div>
