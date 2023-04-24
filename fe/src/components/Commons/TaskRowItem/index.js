@@ -1,5 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
+import { useState } from 'react';
+
 import { BACKEND_DOMAIN } from '../../../utils/api';
 function TaskRowItem({
     name,
@@ -20,6 +22,13 @@ function TaskRowItem({
     vehicle,
     position = 'default desciption',
 }) {
+
+    const [dropdown, toggle] = useState(false);
+
+    const dropDown = () => {
+        toggle(!dropdown);
+    }
+
     return (
         <div className="flex flex-row w-full h-[60px] justify-around text-white text-[14px] font-light bg-[#364153] rounded-[10px] mt-[10px] items-center">
             <input type="checkbox" className="flex ml-[20px] w-[20px] h-[20px] bg-transparent" />
@@ -67,8 +76,18 @@ function TaskRowItem({
                         </div>
                     </div>
                 </li>
-                <li className="hover:cursor-pointer hover:opacity-70 px-[5px]">
-                    <FontAwesomeIcon icon={icon({ name: 'trash' })} />
+                <li>
+                    <button onClick={dropDown}>
+                        <FontAwesomeIcon icon={icon({ name: 'ellipsis' })} />
+                    </button>
+                    {
+                        dropdown ?
+                            <ul className='absolute ml-[-30px] flex flex-col gap-[5px]'>
+                                <li><button className='w-[90px] h-[27px] flex gap-[10px] items-center bg-[#605CFF] rounded-[5px] px-[5px]'><FontAwesomeIcon className='text-[10px]' icon={icon({ name: 'pen' })} />Edit</button></li>
+                                <li><button className='w-[90px] h-[27px] flex gap-[10px] items-center bg-[#FF69B4] rounded-[5px] px-[5px]'><FontAwesomeIcon className='text-[10px]' icon={icon({ name: 'trash' })} />Delete</button></li>
+                            </ul>
+                            : ''
+                    }
                 </li>
             </ul>
         </div>
