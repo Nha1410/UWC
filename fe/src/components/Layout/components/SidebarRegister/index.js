@@ -141,7 +141,10 @@ function SideBarRegister({ toogleMenu }) {
     const handleRoleChange = (e) => {
         setRole(Number(e.target.value));
     };
-
+    const mystyle = {
+        backgroundColor: 'white',
+        textColor: 'black'
+    }
     return (
         <div className="h-full w-full px-[30px] flex flex-col items-center text-white">
             <div className="flex items-center justify-between w-full">
@@ -165,6 +168,7 @@ function SideBarRegister({ toogleMenu }) {
             <div className="flex flex-col items-center">
                 <div className="flex flex-col">
                     <InputForm
+                        style={mystyle}
                         nameLabel="Email Address"
                         refInput={userRef}
                         valueInput={email}
@@ -172,6 +176,7 @@ function SideBarRegister({ toogleMenu }) {
                         placeholder="example@gmail.com"
                         width="w-96"
                         height="h-[50px]"
+                        autofill="false"
                     />
                 </div>
                 <div className="mt-[40px] text-left w-full">
@@ -179,12 +184,14 @@ function SideBarRegister({ toogleMenu }) {
                 </div>
                 <div className="">
                     <InputForm
+                                        style={mystyle}
                         nameLabel="First Name"
                         valueInput={firstName}
                         handleOnChange={handleFirstNameInput}
                         placeholder="Nguyen"
                         width="w-96"
                         height="h-[50px]"
+                        autofill="false"
                     />
                 </div>
                 <div className="mt-[40px] text-left w-full">
@@ -198,6 +205,7 @@ function SideBarRegister({ toogleMenu }) {
                         handleOnChange={handleLastNameInput}
                         width="w-96"
                         height="h-[50px]"
+                        autofill="false"
                     />
                 </div>
                 <div className="mt-[40px] text-left w-full">
@@ -212,6 +220,7 @@ function SideBarRegister({ toogleMenu }) {
                         width="w-96"
                         height="h-[50px]"
                         type="password"
+                        autofill="false"
                     />
                 </div>
                 <div className="mt-[40px] text-left w-full">

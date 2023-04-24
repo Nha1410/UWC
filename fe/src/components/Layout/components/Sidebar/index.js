@@ -70,7 +70,7 @@ function Sidebar() {
                         <Link to="/check-in-out">
                             {role !== 1 &&
                                 <BoxItem
-                                    title="Check in out"
+                                    title="Check in/out"
                                     textColor={active ? 'text-[#605CFF]' : 'text-[#99B2C6]'}
                                     isActive={active}
                                     iconComponent={<FontAwesomeIcon icon={faGauge} className="mr-[5px]" />}

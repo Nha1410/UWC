@@ -96,9 +96,8 @@ function Home() {
                                     {janitors.map((janitor, index) => {
                                         return (
                                             <tr
-                                                className={`flex justify-center items-center py-[10px] rounded-lg ${
-                                                    index % 2 !== 0 ? 'bg-[#1A202C]' : ''
-                                                }`}
+                                                className={`flex justify-center items-center py-[10px] rounded-lg ${index % 2 !== 0 ? 'bg-[#1A202C]' : ''
+                                                    }`}
                                                 key={index}
                                             >
                                                 <th className="flex justify-center items-center w-1/6">
@@ -137,8 +136,10 @@ function Home() {
                         </BoxContent>
                     </div>
                     <div className="py-[10px] pl-[10px] w-2/5 justify-self-stretch">
-                        <BoxContent title="Quản lý công việc">
-                            <div className="h-full"></div>
+                        <BoxContent title="" className=''>
+                            <div className='flex justify-center'>
+                                <img alt="" src="/images/Task Management.png" className="w-[250px] h-full object-fit" />
+                            </div>
                         </BoxContent>
                     </div>
                 </div>
@@ -184,9 +185,8 @@ function Home() {
                                     {collectors.map((collector, index) => {
                                         return (
                                             <tr
-                                                className={`flex justify-center items-center py-[10px] rounded-lg ${
-                                                    index % 2 !== 0 ? 'bg-[#1A202C]' : ''
-                                                }`}
+                                                className={`flex justify-center items-center py-[10px] rounded-lg ${index % 2 !== 0 ? 'bg-[#1A202C]' : ''
+                                                    }`}
                                                 key={index}
                                             >
                                                 <th className="flex justify-center items-center w-1/5">
@@ -223,19 +223,19 @@ function Home() {
                     </div>
                     <div className="py-[10px] pl-[10px] w-2/5">
                         <BoxContent title="Quản lý phương tiện">
-                            {/* <div className="">
+                            <div className="">
                                 <div className="flex justify-start border-b">
-                                    <BoxInfo srcImage="/images/fake-avatar-janitor.png" name="Truck 8" weight="80 ton" />
+                                    <BoxInfo className='w-[50px]' srcImage="/images/Truck.png" name="Truck 8" weight="80 ton" />
                                 </div>
                                 <div className="flex justify-start">
-                                    <BoxInfo srcImage="/images/fake-avatar.png" name="Truck 16" weight="122 ton" />
+                                    <BoxInfo srcImage="/images/Truck2.png" name="Truck 16" weight="122 ton" />
                                 </div>
-                            </div> */}
+                            </div>
                         </BoxContent>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
