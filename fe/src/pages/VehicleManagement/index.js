@@ -1,8 +1,34 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro';
 import TaskRowItem from '../../components/Commons/TaskRowItem';
+import { Popup } from 'reactjs-popup';
+import { store } from '../../services/Vehicle/store';
+import { fetch } from '../../services/Vehicle/fetch';
+import { useEffect, useState } from 'react';
+
 function VehicalManagement() {
     let isVehicle = true;
+    const form = {
+        type: '',
+        use_for: '',
+        location: '',
+        status: ''
+    };
+    const [vehicleArr, setVehicle] = useState([]);
+    function getValue(e) {
+        form[`${e.target.name}`] = e.target.value;
+        console.log(vehicleArr);
+    }
+    const submitStore = async() => {
+        await store(form);
+    }
+    const fetchVehicle = async() => {
+        const vehicles = await fetch();
+        setVehicle(vehicles);
+    }
+    useEffect(() => {
+        fetchVehicle();
+    },[])
     return (
         <div className="w-full h-full bg-[#1A202C] pb-[30px]">
             <div className="pt-[35px]">
@@ -18,7 +44,35 @@ function VehicalManagement() {
                         </div>
                         <div className="flex flex-row w-[122px] h-[40px] bg-[#605CFF] border rounded-[8px] text-white justify-center items-center">
                             <FontAwesomeIcon icon={icon({ name: 'plus' })} />
-                            <span className="ml-[8px]">Add New</span>
+                            <Popup trigger={<button className="button"> New Vehicle </button>} modal class="bg-[#364153]">
+                                <div className='modal flex flex-col gap-[1.5rem] text-[14px]'>
+                                    <p className='header'>Vehicle</p>
+                                    <div>
+                                        <input onChange={(e) => getValue(e)} placeholder='Type' name='type' className='rounded-[10px] opacity-30 w-[100%] h-[42px] px-2 py-1 bg-[#1A202C]'></input>
+                                    </div>
+                                    <div>
+                                        <input  onChange={(e) => getValue(e)} placeholder='Use for' name='use_for' className='rounded-[10px] opacity-30 w-[100%] h-[42px] px-2 py-1 bg-[#1A202C]'></input>
+                                    </div> 
+                                    <div>
+                                        <input onChange={(e) => getValue(e)} placeholder='Location' name='location' className='rounded-[10px] opacity-30 w-[100%] h-[42px] px-2 py-1 bg-[#1A202C]'></input>
+                                    </div> 
+                                    <div>
+                                        <select onChange={(e) => getValue(e)} name="status" className='rounded-[10px] opacity-30 w-[100%] h-[42px] px-2 py-1 bg-[#1A202C]'>
+                                            <option value=""></option>
+                                            <option value="available">Available</option>
+                                            <option value="not_available">Not Available</option>
+                                        </select>    
+                                    </div>
+                                    <div className='flex flex-row justify-end gap-[1rem]'>
+                                        <button className='flex justify-center border-[#605CFF] border-1 border-solid rounded-[10px] p-[0.3rem] h-[40px] items-center w-[25%] gap-[0.5rem] text-[#605CFF]'>
+                                            Clear
+                                        </button>
+                                        <button onClick={submitStore} className='flex justify-center bg-[#605CFF] rounded-[10px] p-[0.3rem] h-[40px] items-center w-[25%] gap-[0.5rem]'>
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </Popup>
                         </div>
                     </div>
                 </div>
@@ -37,87 +91,20 @@ function VehicalManagement() {
                         </li>
                     </ul>
                 </div>
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Garbage Trucks"
-                    id="1"
-                    bgColor="#35515b"
-                    textColor="#2FE6A7"
-                    textContent="Availabel"
-                    useFor="Collector"
-                    location="Phuong 1"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Roll-off Trucks"
-                    id="2"
-                    bgColor="#4a455d"
-                    textColor="#FF69B4"
-                    textContent="Not availabel"
-                    useFor="Collector"
-                    location="Phuong 2"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Rear Load Trucks"
-                    id="3"
-                    bgColor="#35515b"
-                    textColor="#2FE6A7"
-                    textContent="Availabel"
-                    useFor="Collector"
-                    location="Phuong 3"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Side Load Trucks"
-                    id="4"
-                    bgColor="#4a455d"
-                    textColor="#FF69B4"
-                    textContent="Not availabel"
-                    useFor="Collector"
-                    location="Phuong 4"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Hazardous Trolley"
-                    id="5"
-                    bgColor="#35515b"
-                    textColor="#2FE6A7"
-                    textContent="Availabel"
-                    useFor="Janitor"
-                    location="Phuong 5"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Agricultural Trolley"
-                    id="6"
-                    bgColor="#4a455d"
-                    textColor="#FF69B4"
-                    textContent="Not availabel"
-                    useFor="Janitor"
-                    location="Phuong 6"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Industrial Trolley"
-                    id="7"
-                    bgColor="#35515b"
-                    textColor="#2FE6A7"
-                    textContent="Availabel"
-                    useFor="Janitor"
-                    location="Phuong 7"
-                />
-                <TaskRowItem
-                    isVehicle={isVehicle}
-                    name="Medical Trolley"
-                    id="8"
-                    bgColor="#4a455d"
-                    textColor="#FF69B4"
-                    textContent="Not availabel"
-                    phone="0913121234"
-                    useFor="Janitor"
-                    location="Phuong 8"
-                />
+                {
+                    vehicleArr.map((item, i) => (
+                        <TaskRowItem
+                            isVehicle={isVehicle}
+                            name={item.type}
+                            id={item.id}
+                            bgColor="#35515b"
+                            textColor="#2FE6A7"
+                            textContent={item.status}
+                            useFor={item.use_for}
+                            location={item.location}
+                        />
+                    ))
+                }
             </div>
         </div>
     );
